@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat&display=swap');
+
+.popular {
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        padding: 0 20px;
+
+        &:hover {
+            .popular {
+                &__item-img {
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, .15), 5px 5px 20px rgba(0, 0, 0, .15);
+                }
+
+                &__item-title {
+                    &:after {
+                        width: 100%; 
+                        left: 0; 
+                    }
+                }
+            }
+        }
+    }
+
+    &__item-title {
+        font-size: 32px;
+        font-family: 'Anton', sans-serif;
+        padding: 20px 0;
+        position: relative;
+
+        &:after {
+            background: none repeat scroll 0 0 transparent;
+            bottom: 18px;
+            content: "";
+            display: block;
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            background: #333;
+            transition: width .3s ease, left .3s ease;
+            width: 0;
+        }
+    }
+
+    &__item-img {
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .1), 5px 5px 10px rgba(0, 0, 0, .1);
+        max-width: 400px;
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        transition: box-shadow .3s ease-in-out;
+
+        @media (min-width: 768px) {
+            height: 400px;
+        }
+    }
+
+    &__item-description {
+        font-family: 'Montserrat', sans-serif;
+        color: rgb(150, 150, 150);
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        border-top: 1px solid rgb(189, 189, 189);
+        border-bottom: 1px solid rgb(189, 189, 189);
+    }
+}
