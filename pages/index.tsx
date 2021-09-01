@@ -29,7 +29,7 @@ class PopularDrinks extends React.Component<WithRouterProps, MyState, MyProps> {
 
     async fetchData() {
         const options = {
-            method: 'GET',
+            Method: 'GET',
             url: 'https://the-cocktail-db.p.rapidapi.com/popular.php',
             headers: {
                 'x-rapidapi-host': 'the-cocktail-db.p.rapidapi.com',
