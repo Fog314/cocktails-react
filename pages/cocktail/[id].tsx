@@ -7,7 +7,7 @@ import React, { useEffect, useState }  from 'react'
 interface DrinkItem {
     strDrink: string | null,
     strInstructions: string | null,
-    strDrinkThumb: string | null
+    strDrinkThumb: string | undefined
     ingredients: IngredientItem[] | null
 }
 
@@ -20,7 +20,7 @@ function Cocktail() {
     const [ drink, setDrink ] = useState<DrinkItem>({
         strDrink: null,
         strInstructions: null,
-        strDrinkThumb: null,
+        strDrinkThumb: undefined,
         ingredients: null
     })
 
