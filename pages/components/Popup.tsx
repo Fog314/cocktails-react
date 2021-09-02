@@ -45,7 +45,7 @@ function PopUp (props: PropsItem) {
     }
 
     if (!props.item) {
-        return undefined
+        return null
     }
 
     const { strDrink, strInstructions, strDrinkThumb } = props.item
