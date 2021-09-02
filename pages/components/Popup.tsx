@@ -44,6 +44,10 @@ function PopUp (props: PropsItem) {
         props.togglePopup()
     }
 
+    if (!props.item) {
+        return undefined
+    }
+
     const { strDrink, strInstructions, strDrinkThumb } = props.item
     const ingredients = filteredIngr(props.item)
 
