@@ -1,6 +1,4 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { WithRouterProps } from 'next/dist/client/with-router'
 import axios from "axios"
 import React, { useEffect, useState }  from 'react'
 

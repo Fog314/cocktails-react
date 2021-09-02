@@ -1,33 +1,33 @@
-import Link from 'next/link'
-import { withRouter } from 'next/router'
-import { WithRouterProps } from 'next/dist/client/with-router'
-import DrinkCard from './_ui/DrinkCard'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import axios from "axios"
-import React from 'react'
+import React, { useEffect, useState }  from 'react'
+import PopUp from '../pages/components/Popup'
 
-type MyProps = {
-    // using `interface` is also ok
-    message: string
+interface DrinkItem {
+    strDrink: string | null,
+    strInstructions: string | null,
+    strDrinkThumb: string | undefined
+    ingredients: IngredientItem[] | null
 }
 
-type MyState = {
-    drinks: DrinkItem[] // like this
+interface IngredientItem {
+    name: string | null,
+    measure: string | null,
 }
 
-export interface DrinkItem {
-    idDrink: number,
-    strDrink: string,
-    strInstructions: string,
-    strDrinkThumb: string
-}
+function Main() {
+    const [ popular, setPopular ] = useState<DrinkItem[]>([{
+        strDrink: null,
+        strInstructions: null,
+        strDrinkThumb: undefined,
+        ingredients: null
+    }])
 
-class PopularDrinks extends React.Component<WithRouterProps, MyState, MyProps> {
-    state: MyState = {
-        // optional second annotation for better type inference
-        drinks: [],
-    }
+    const [ isPopupOpen, setPopup ] = useState(false)
+    const [ selectedItem, selectDrink ] = useState(0)
 
-    async fetchData() {
+    const fetchData = async () => {
         const options = {
             Method: 'GET',
             url: 'https://the-cocktail-db.p.rapidapi.com/popular.php',
@@ -39,45 +39,92 @@ class PopularDrinks extends React.Component<WithRouterProps, MyState, MyProps> {
 
         const { data } = await axios.request(options)
 
-        this.setState({
-            drinks: data.drinks
-        })
+        setPopular(data.drinks)
     }
 
-    async componentDidMount() {
-        this.fetchData()
+    useEffect(() => {
+        if (popular.length > 1) return undefined
+
+        fetchData()
+    })
+
+    const breakpoints = {
+        0: {
+            slidesPerView: 1,
+            spaceBetween: 20
+        },
+        320: {
+            slidesPerView: 2,
+            spaceBetween: 10
+        },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 20
+        },
+        1024: {
+            slidesPerView: 4,
+            spaceBetween: 30
+        },
+        1600: {
+            slidesPerView: 5,
+            spaceBetween: 30
+        }
     }
 
-    onCardClick(id: number) {
-        // this.props.router.push(`/${id}`, undefined, { shallow: true })
+    const togglePopup = () => {
+        setPopup(!isPopupOpen)
     }
 
-    render() {
-        const { router } = this.props
+    const onDrinkSelect = (id: number) => {
+        togglePopup()
+        selectDrink(id)
+    }
 
-        return (
-            <div className="popular">
-                <div className="popular__title">
-                    Popular cocktails
+    return (
+        <div className="main">
+            <div className="main__inner">
+                <div className="main__title">
+                    Популярные за все время
                 </div>
-                <div className="popular__items">
+                
+                {
+                    isPopupOpen &&
+                    <PopUp
+                        className="main__popup"
+                        item={ popular[selectedItem] }
+                        opened={ isPopupOpen }
+                        togglePopup={ togglePopup }
+                    />
+                }
+                
+                <Swiper
+                    spaceBetween={20}
+                    slidesPerView={5}
+                    breakpoints={breakpoints}
+                >
                     {
-                        this.state.drinks.map((el: DrinkItem, index: number) => {
+                        popular.map((el, index) => {
                             return (
-                                <div key={index} onClick={ () => router.push(`/cocktail/${el.idDrink}`, undefined, { shallow: true }) }>
-                                    <DrinkCard
-                                            strDrink={el.strDrink}
-                                            strInstructions={el.strInstructions}
-                                            strDrinkThumb={el.strDrinkThumb}
+                                <SwiperSlide
+                                    className="main__carousel-item"
+                                    key={ index }
+                                    onClick={ () => onDrinkSelect(index) }
+                                >
+                                    <img
+                                        className="main__carousel-img"
+                                        src={ el.strDrinkThumb }
                                     />
-                                </div>
+                                    <div className="main__carousel-title">
+                                        { el.strDrink }
+                                    </div>
+                                </SwiperSlide>
                             )
                         })
                     }
-                </div>
+                </Swiper>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
-export default withRouter(PopularDrinks)
+export default Main
