@@ -1,9 +1,9 @@
 import React from 'react'
 
 type Props = {
-    strDrink: string,
-    strInstructions: string,
-    strDrinkThumb: string
+    strDrink: string | null,
+    strInstructions: string | null,
+    strDrinkThumb: string | undefined
 }
 
 class DrinkCard extends React.Component<Props> {

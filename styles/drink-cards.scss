@@ -4,54 +4,33 @@
     &__item {
         display: flex;
         flex-direction: column;
-        align-items: center;
         cursor: pointer;
-        padding: 0 20px;
-
-        &:hover {
-            .popular {
-                &__item-img {
-                    box-shadow: 0 10px 20px rgba(0, 0, 0, .15), 5px 5px 20px rgba(0, 0, 0, .15);
-                }
-
-                &__item-title {
-                    &:after {
-                        width: 100%; 
-                        left: 0; 
-                    }
-                }
-            }
-        }
+        padding: 0 20px 20px;
+        background-color: #F9F7F7;
+        border-radius: 6px;
+        margin-top: 30px;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     }
 
     &__item-title {
-        font-size: 32px;
+        color: #1B81DB;
+        font-size: 24px;
         font-family: 'Anton', sans-serif;
-        padding: 20px 0;
+        text-align: left;
         position: relative;
-
-        &:after {
-            background: none repeat scroll 0 0 transparent;
-            bottom: 18px;
-            content: "";
-            display: block;
-            height: 2px;
-            left: 50%;
-            position: absolute;
-            background: #333;
-            transition: width .3s ease, left .3s ease;
-            width: 0;
-        }
+        padding-bottom: 10px;
     }
 
     &__item-img {
         border-radius: 20px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, .1), 5px 5px 10px rgba(0, 0, 0, .1);
         max-width: 400px;
         height: 300px;
         width: 100%;
+        position: relative;
+        top: -30px;
         object-fit: cover;
         transition: box-shadow .3s ease-in-out;
+        box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 56%), 0 4px 25px 0px rgba(0, 0, 0, 12%), 0 8px 10px -5px rgba(0, 0, 0, 20%);
 
         @media (min-width: 768px) {
             height: 400px;
@@ -59,12 +38,15 @@
     }
 
     &__item-description {
+        color: #1B81DB;
         font-family: 'Montserrat', sans-serif;
-        color: rgb(150, 150, 150);
         width: 100%;
-        text-align: center;
-        padding: 20px 0;
-        border-top: 1px solid rgb(189, 189, 189);
-        border-bottom: 1px solid rgb(189, 189, 189);
+        text-align: justify;
+        text-overflow:ellipsis;
+        overflow:hidden;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        white-space: normal;
     }
 }

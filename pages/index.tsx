@@ -3,6 +3,7 @@ import 'swiper/css';
 import axios from "axios"
 import React, { useEffect, useState }  from 'react'
 import PopUp from '../pages/components/Popup'
+import DrinkCard from '../pages/_ui/DrinkCard'
 
 interface DrinkItem {
     strDrink: string | null,
@@ -53,9 +54,9 @@ function Main() {
             slidesPerView: 1,
             spaceBetween: 20
         },
-        320: {
+        480: {
             slidesPerView: 2,
-            spaceBetween: 10
+            spaceBetween: 20
         },
         768: {
             slidesPerView: 3,
@@ -110,13 +111,11 @@ function Main() {
                                     key={ index }
                                     onClick={ () => onDrinkSelect(index) }
                                 >
-                                    <img
-                                        className="main__carousel-img"
-                                        src={ el.strDrinkThumb }
+                                    <DrinkCard
+                                        strDrink={ el.strDrink }
+                                        strInstructions={ el.strInstructions }
+                                        strDrinkThumb={ el.strDrinkThumb }
                                     />
-                                    <div className="main__carousel-title">
-                                        { el.strDrink }
-                                    </div>
                                 </SwiperSlide>
                             )
                         })
