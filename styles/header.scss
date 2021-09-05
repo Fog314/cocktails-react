@@ -1,0 +1,49 @@
+.header {
+    height: 70px;
+
+    &__inner {
+        position: fixed;
+        top: 0;
+        left: 0%;
+        height: 70px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        z-index: 5;
+        border-radius: 0 0 4px 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        gap: 20px;
+    }
+
+    &__input {
+        border: 1px solid #b1c4f0;
+        border-radius: 4px;
+        background-color: rgba(162, 201, 232, 0.5);
+        height: 40px;
+        font-size: 22px;
+        color: #f9f7f7;
+        padding: 0 10px;
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::placeholder {
+            color: inherit
+        }
+    }
+
+    &__logo-wrapper {
+        height: 90%;
+        width: 50px;
+    }
+
+    &__logo {
+        height: 100%;
+        width: 100%;
+    }
+}

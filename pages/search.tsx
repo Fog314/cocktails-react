@@ -24,8 +24,8 @@ interface IngredientItem {
 function Main() {
     const router = useRouter()
     const [ popular, setPopular ] = useState<DrinkItem[]>([])
-    const [ latest, setLatest ] = useState<DrinkItem[]>([])
     const [ searchedString, setSearchString ] = useState<string | string[]>('')
+
     const [ selectedItem, selectDrink ] = useState<DrinkItem>({
         strDrink: null,
         strInstructions: null,
@@ -33,64 +33,44 @@ function Main() {
         ingredients: []
     })
     const [showMessage, setShowMessage] = useState(false)
-    const [isWatching, setListener] = useState(false)
 
-    const fetchPopular = async () => {
-        const { data } = await axios.get('/api/popular')
-
-        setPopular(data)
-    }
-
-    const fetchLatest = async () => {
-        const { data } = await axios.get('/api/latest')
-
-        setLatest(data)
-    }
-
-    const isBottom = (el: Element | null) => {
-        if (!el) return undefined
-
-        return el.getBoundingClientRect().bottom <= window.innerHeight;
-    }
-
-    const trackScrolling = () => {
-        const wrappedElement = document.querySelector('.header')
-
-        if (isBottom(wrappedElement)) {
-            document.removeEventListener('scroll', trackScrolling);
-        }
-    }
-
-    const onCocktailSearch = (val: string) => {
+    const onCocktailSearch = debounce(1000, false, (val: string) => {
         setSearchString(val)
 
-        const funk = debounce(1000, false, () => {
-            router.push({
-                pathname: '/search',
-                query: { text: val },
-            })
-        })
+        // router.push({
+        //     pathname: '/search',
+        //     query: { text: val },
+        // })
+        fetchCocktails(val)
+    })
 
-        funk()
+    const fetchCocktails = async (val: string | null = null) => {
+        try {
+            const text = val ? val : router.query.text
+
+            if (!text) return undefined
+    
+            setSearchString(text)
+    
+            // const data = await axios.request(`/api/search/${text}`)
+            const { data } = await axios.get(`/api/search/${text}`)
+    
+            if (data === 'Internal Server Error') return undefined
+    
+            setPopular(data)
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     useEffect(() => {
-        if (!isWatching) {
-            document.addEventListener('scroll', trackScrolling)
-        }
-
         try {
-            if (popular.length === 0) {
-                fetchPopular()
-            }
+            if (popular.length !== 0) return undefined
 
-            if (latest.length === 0) {
-                fetchLatest()
-            }
+            fetchCocktails()
         } catch (err) {
-            alert(err)
+            console.error(err)
         }
-
     })
 
     const breakpoints = {
@@ -123,10 +103,10 @@ function Main() {
 
     return (
         <div className="main">
-            <Header value={ searchedString } onSearch={ (val: string) => onCocktailSearch(val) } />
+            <Header value={ "" } onSearch={ (val: string) => onCocktailSearch(val) } />
             <div className="main__inner">
                 <div className="main__title">
-                    Popular for all time
+                    Searched cocktails
                 </div>
                 
                 <CSSTransition
@@ -154,35 +134,6 @@ function Main() {
                 >
                     {
                         popular.map((el, index) => {
-                            return (
-                                <SwiperSlide
-                                    className="main__carousel-item"
-                                    key={ index }
-                                    onClick={ () => onDrinkSelect({
-                                        strDrink: el.strDrink,
-                                        strInstructions: el.strInstructions,
-                                        strDrinkThumb: el.strDrinkThumb,
-                                        ingredients: el.ingredients
-                                    })}
-                                >
-                                    <DrinkCard drink={ el } />
-                                </SwiperSlide>
-                            )
-                        })
-                    }
-                </Swiper>
-
-                <div className="main__title">
-                    Your inspiration
-                </div>
-
-                <Swiper
-                    spaceBetween={20}
-                    slidesPerView={5}
-                    breakpoints={breakpoints}
-                >
-                    {
-                        latest.map((el, index) => {
                             return (
                                 <SwiperSlide
                                     className="main__carousel-item"

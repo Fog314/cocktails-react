@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface DrinkItem {
     strDrink: string | null,
     strInstructions: string | null,
     strDrinkThumb: string | undefined
-    ingredients: IngredientItem[] | null
+    ingredients: IngredientItem[]
 }
 
 interface IngredientItem {
@@ -15,31 +15,10 @@ interface IngredientItem {
 interface PropsItem {
     item: DrinkItem,
     className: string,
-    opened: boolean,
     togglePopup: () => void
 }
 
 function PopUp (props: PropsItem) {
-    const filteredIngr = (drink: DrinkItem) => {
-        const ingredient: IngredientItem[] = []
-        let index = 0
-
-        for (let [key, value] of Object.entries(drink)) {
-            if (key.includes('strIngredient') && value) {
-                ingredient.push({ name: value, measure: null })
-            }
-
-            if (key.includes('strMeasure') && value) {
-                
-                ingredient[index]['measure'] = value
-
-                index = index + 1
-            }
-        }
-
-        return ingredient
-    }
-
     const onPopupClose = () => {
         props.togglePopup()
     }
@@ -48,11 +27,11 @@ function PopUp (props: PropsItem) {
         return null
     }
 
-    const { strDrink, strInstructions, strDrinkThumb } = props.item
-    const ingredients = filteredIngr(props.item)
+    const { strDrink, strInstructions, strDrinkThumb, ingredients } = props.item
 
     return (
         <div className={ `popup ${props.className}` }>
+            {/* <div className="popup__main" /> */}
             <div
                 className="popup__close"
                 onClick={ () => onPopupClose() }
