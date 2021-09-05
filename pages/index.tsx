@@ -21,7 +21,7 @@ interface IngredientItem {
     measure: string | null,
 }
 
-function Main() {
+function MainPage() {
     const router = useRouter()
     const [ popular, setPopular ] = useState<DrinkItem[]>([])
     const [ latest, setLatest ] = useState<DrinkItem[]>([])
@@ -64,14 +64,10 @@ function Main() {
     const onCocktailSearch = (val: string) => {
         setSearchString(val)
 
-        const funk = debounce(1000, false, () => {
-            router.push({
-                pathname: '/search',
-                query: { text: val },
-            })
+        router.push({
+            pathname: '/search',
+            query: { text: val },
         })
-
-        funk()
     }
 
     useEffect(() => {
@@ -205,4 +201,4 @@ function Main() {
     )
 }
 
-export default Main
+export default MainPage

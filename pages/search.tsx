@@ -21,7 +21,7 @@ interface IngredientItem {
     measure: string | null,
 }
 
-function Main() {
+function SearchPage() {
     const router = useRouter()
     const [ popular, setPopular ] = useState<DrinkItem[]>([])
     const [ searchedString, setSearchString ] = useState<string | string[]>('')
@@ -106,7 +106,7 @@ function Main() {
             <Header value={ "" } onSearch={ (val: string) => onCocktailSearch(val) } />
             <div className="main__inner">
                 <div className="main__title">
-                    Searched cocktails
+                    Finded cocktails
                 </div>
                 
                 <CSSTransition
@@ -156,4 +156,4 @@ function Main() {
     )
 }
 
-export default Main
+export default SearchPage

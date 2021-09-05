@@ -22,3 +22,29 @@ a {
     min-width: 100vw;
     background-color: #1B81DB;
 }
+
+.app-enter {
+    opacity: 0;
+    transform: scale(0.95);
+    border-radius: 20px;
+}
+
+.app-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 0;
+    transition: opacity 200ms, transform 200ms, border-radius 10ms;
+}
+
+.app-exit {
+    opacity: 1;
+    border-radius: 0;
+    transform: scale(1);
+}
+
+.app-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    border-radius: 20px;
+    transition: opacity 200ms, transform 200ms, border-radius 10ms;
+}

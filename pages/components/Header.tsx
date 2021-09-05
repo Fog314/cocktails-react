@@ -23,13 +23,16 @@ function Header(props: Props) {
             <div className="header__inner">
                 <div className="header__logo-wrapper">
                     <Link
-                        passHref={ false }
+                        passHref={ true }
                         href="/"
                     >
                         <Logo className="header__logo" />
                     </Link>
                 </div>
-                <form className="header__input-wrapper" onSubmit={(e) => submitHandler(e)} >
+                <form
+                    className="header__input-wrapper"
+                    onSubmit={ (e) => submitHandler(e) } 
+                >
                     <input
                         className="header__input"
                         type="text"
