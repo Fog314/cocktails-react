@@ -34,7 +34,7 @@ function Main() {
     })
     const [showMessage, setShowMessage] = useState(false)
 
-    const onCocktailSearch = debounce(1000, false, (val: string) => {
+    const onCocktailSearch = debounce(2000, false, (val: string) => {
         setSearchString(val)
 
         // router.push({
