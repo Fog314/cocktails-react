@@ -1,5 +1,4 @@
 import React, { BaseSyntheticEvent, ReactEventHandler, useEffect, useState } from 'react'
-import axios from 'axios'
 import Logo from '../../public/assets/logo.svg'
 
 interface Props {
@@ -7,13 +6,15 @@ interface Props {
     onSearch: Function
 }
 
-function Header (props: Props) {
-    const changeHandler = (e: BaseSyntheticEvent) => {
-        const { value } = e.target
+function Header(props: Props) {
+    const [ searchString, setSearch ] = useState('')
 
-        if (value === '') return undefined
+    const submitHandler = (e: BaseSyntheticEvent) => {
+        e.preventDefault()
 
-        props.onSearch(value)
+        if (searchString === '') return undefined
+
+        props.onSearch(searchString)
     }
 
     return (
@@ -22,13 +23,31 @@ function Header (props: Props) {
                 <div className="header__logo-wrapper">
                     <Logo className="header__logo" />
                 </div>
-                <input
-                    className="header__input"
-                    type="text"
-                    placeholder="Search cocktails"
+                <form className="header__input-wrapper" onSubmit={(e) => submitHandler(e)} >
+                    <input
+                        className="header__input"
+                        type="text"
+                        placeholder="Search cocktails"
+                        onChange={ (e) => setSearch(e.target.value) }
                     // value={ props.value }
-                    onChange={ e => changeHandler(e) }
-                />
+                    />
+                    <svg
+                        className="header__input-search"
+                        aria-labelledby="title desc"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 19.9 19.7"
+                    >
+                        <g
+                            fill="none"
+                            stroke="#f9f7f7"
+                            strokeWidth="1px"
+                        >
+                            <path strokeLinecap="square" d="M18.5 18.3l-5.4-5.4" />
+                            <circle cx="8" cy="8" r="7" />
+                        </g>
+                    </svg>
+                </form>
             </div>
         </div>
     )

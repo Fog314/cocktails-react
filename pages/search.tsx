@@ -34,7 +34,7 @@ function Main() {
     })
     const [showMessage, setShowMessage] = useState(false)
 
-    const onCocktailSearch = debounce(2000, false, (val: string) => {
+    const onCocktailSearch = (val: string) => {
         setSearchString(val)
 
         // router.push({
@@ -42,7 +42,7 @@ function Main() {
         //     query: { text: val },
         // })
         fetchCocktails(val)
-    })
+    }
 
     const fetchCocktails = async (val: string | null = null) => {
         try {

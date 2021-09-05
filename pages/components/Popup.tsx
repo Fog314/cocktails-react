@@ -31,40 +31,41 @@ function PopUp (props: PropsItem) {
 
     return (
         <div className={ `popup ${props.className}` }>
-            {/* <div className="popup__main" /> */}
-            <div
-                className="popup__close"
-                onClick={ () => onPopupClose() }
-            >
-                X
-            </div>
-            <div className="popup__title">
-                { strDrink }
-            </div>
-            <div className="popup__img-wrapper">
-                <img
-                    className="popup__img"
-                    src={ strDrinkThumb }
-                />
-            </div>
-            <div className="popup__ingredient-wrapper">
-                {
-                    ingredients.map((item: IngredientItem) => {
-                        return (
-                            <div className="cocktail__ingredient" key={item.name} >
-                                <div className="cocktail__ingredient-name">
-                                    { item.name }
+            <div className="popup__main">
+                <div
+                    className="popup__close"
+                    onClick={ () => onPopupClose() }
+                >
+                    X
+                </div>
+                <div className="popup__title">
+                    { strDrink }
+                </div>
+                <div className="popup__img-wrapper">
+                    <img
+                        className="popup__img"
+                        src={ strDrinkThumb }
+                    />
+                </div>
+                <div className="popup__ingredient-wrapper">
+                    {
+                        ingredients.map((item: IngredientItem) => {
+                            return (
+                                <div className="cocktail__ingredient" key={item.name} >
+                                    <div className="cocktail__ingredient-name">
+                                        { item.name }
+                                    </div>
+                                    <div className="cocktail__ingredient-value">
+                                        { item.measure }
+                                    </div>
                                 </div>
-                                <div className="cocktail__ingredient-value">
-                                    { item.measure }
-                                </div>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            <div className="popup__text">
-                { strInstructions }
+                            )
+                        })
+                    }
+                </div>
+                <div className="popup__text">
+                    { strInstructions }
+                </div>
             </div>
         </div>
     )
