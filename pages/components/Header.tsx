@@ -1,5 +1,6 @@
 import React, { BaseSyntheticEvent, ReactEventHandler, useEffect, useState } from 'react'
 import Logo from '../../public/assets/logo.svg'
+import Link from 'next/link'
 
 interface Props {
     value: string | string[],
@@ -21,7 +22,12 @@ function Header(props: Props) {
         <div className="header">
             <div className="header__inner">
                 <div className="header__logo-wrapper">
-                    <Logo className="header__logo" />
+                    <Link
+                        passHref={ false }
+                        href="/"
+                    >
+                        <Logo className="header__logo" />
+                    </Link>
                 </div>
                 <form className="header__input-wrapper" onSubmit={(e) => submitHandler(e)} >
                     <input
