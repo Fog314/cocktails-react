@@ -26,7 +26,9 @@ function Header(props: Props) {
                         passHref={ true }
                         href="/"
                     >
-                        <Logo className="header__logo" />
+                        <a>
+                            <Logo className="header__logo" />
+                        </a>
                     </Link>
                 </div>
                 <form
