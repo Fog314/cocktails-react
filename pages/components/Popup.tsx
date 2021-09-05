@@ -51,11 +51,11 @@ function PopUp (props: PropsItem) {
                     {
                         ingredients.map((item: IngredientItem) => {
                             return (
-                                <div className="cocktail__ingredient" key={item.name} >
-                                    <div className="cocktail__ingredient-name">
-                                        { item.name }
+                                <div className="popup__ingredient" key={item.name} >
+                                    <div className="popup__ingredient-name">
+                                        { item.name }:
                                     </div>
-                                    <div className="cocktail__ingredient-value">
+                                    <div className="popup__ingredient-value">
                                         { item.measure }
                                     </div>
                                 </div>

@@ -68,8 +68,9 @@
     width: 100vw;
     z-index: 5;
     padding: 20px 0;
-    background-color: rgb(177, 196, 240);
+    background-color: #F9F7F7;
     font-family: 'Montserrat', sans-serif;
+    color: #1b81db;
 
     // &__main {
     //     opacity: 0.08;
@@ -90,9 +91,9 @@
         top: 20px;
         font-weight: bold;
         border-radius: 50%;
-        border: 1px solid gray;
-        width: 28px;
-        height: 28px;
+        border: 1px solid #1b81db;
+        width: 32px;
+        height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -104,7 +105,6 @@
         text-align: center;
         padding-bottom: 20px;
         font-family: 'Anton', sans-serif;
-        text-shadow: 5px 5px 20px black;
         max-width: 80%;
         margin: auto;
     }
@@ -127,6 +127,25 @@
         object-position: top;
         border-radius: 8px;
         box-shadow: 0 16px 38px -12px rgb(0 0 0 / 56%), 0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+    }
+
+    &__ingredient {
+        display: flex;
+        display: flex;
+        width: 80%;
+        max-width: 420px;
+        justify-content: space-between;
+        font-size: 18px;
+        padding: 0 20px 10px;
+        margin: auto;
+
+        @media (min-width: 768px) {
+            font-size: 28px;
+        }
+    }
+
+    &__ingredient-name {
+        font-weight: bold;
     }
 }
 
