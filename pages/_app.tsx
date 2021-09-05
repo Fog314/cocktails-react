@@ -3,6 +3,8 @@ import '../styles/globals.scss'
 import '../styles/index.scss'
 import '../styles/cocktail.scss'
 import '../styles/header.scss'
+import '../styles/popup.scss'
+
 import type { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
