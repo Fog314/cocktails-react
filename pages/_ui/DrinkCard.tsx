@@ -17,7 +17,7 @@ interface IngredientItem {
 function DrinkCard(props: Props) {
     const { drink } = props
 
-    if (!drink.ingredients || drink.ingredients.length === 0) return (<div></div>)
+    if (!drink || !drink.ingredients || drink.ingredients.length === 0) return (<div></div>)
     return (
         <div className="popular__item">
             <img
